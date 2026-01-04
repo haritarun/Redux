@@ -5,12 +5,24 @@ import {
   incrementByAmount
 } from "./Features/Counter/CounterSlice";
 
+
+
 function App() {
   const count = useSelector((state) => state.counter.value);
+  const users = useSelector((state) => state.user.users);
+  console.log("Users:", users);
   const dispatch = useDispatch();
 
   return (
     <div>
+      <ul>
+        {
+          users.map(user => (
+            <li key= {user.id}>{user.name}</li>
+          ))
+        }
+      </ul>
+      <button onClick={()=>dispatch}></button>
       <h2>Count: {count}</h2>
 
       <button onClick={() => dispatch(increment())}>+</button>
@@ -18,6 +30,7 @@ function App() {
       <button onClick={() => dispatch(incrementByAmount(5))}>
         +5
       </button>
+      
     </div>
   );
 }
